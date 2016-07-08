@@ -1,0 +1,35 @@
+<div class="panel">
+    <div class="panel-heading">
+    	<h3>Available Topics</h3>				 
+		<p>Filter <input data-bind="textInput: Filter" />   Limit <input data-bind="textInput: Limit" /></p>
+		<p>Topics <input type="checkbox" data-bind="checked: UseTopics" /> ; <p>Comments <input type="checkbox" data-bind="checked: UseComments" /></p>
+		 <a href='#' data-bind='click: listTopics '>Select</a> 
+
+  	</div>
+  	<div class="panel-body">
+		<p data-bind="text: 'Count:' + FilteredCount()"></p>
+  		<table class="table table-hover">
+      		<tr><th>Topic</th><th></th><th></th></tr>
+      		<!-- ko foreach: Topics -->
+			    <!-- div data-bind='component: {
+					name: "Topic",
+					params: {data:data}
+				}'></div -->
+				<tr>
+					<td>
+						<a target = "_user" data-bind="attr: { href: 'https://vk.com/id'+data.from_id }, text: data.from_id"></a>
+					</td>
+				</tr>
+				<tr data-bind='click: select '>
+					<td>						
+						<b><p data-bind="text: date"></p></b>
+						<b><p data-bind="text: data._id"></p></b>
+						<b><p data-bind="text: data.title"></p></b>
+						<p data-bind="text: data.text"></p>
+					</td>
+				</tr>
+			<!-- /ko -->
+		</table>
+  	</div>
+</div>
+       

@@ -1,0 +1,23 @@
+
+<div class="panel" css{margin:2px} data-bind="visible:user_name().length > 0 ">
+	<div class="panel-body">
+		<strong data-bind="text: user_name() " ></strong><br>
+        <div class="panel">
+            <div class="panel-heading">
+                <h4>Completed Tests</h4>
+            </div>
+            <div class="panel-body">
+                <table class="table table-hover">
+                    <tr><th>Test</th><th>Date</th><th>Score</th></tr>
+                    <!-- ko foreach: completed_tests -->
+                    <tr data-bind='click: select '>
+                        <td data-bind="text: data.name"></td>
+                        <td data-bind="text: data.date"></td>
+                        <td data-bind="text: data.score"></td>
+                    </tr>
+                    <!-- /ko -->
+                </table>
+            </div>
+        </div>
+	</div>
+</div>

@@ -1,0 +1,22 @@
+<div class="panel">
+    <div class="panel-heading">
+    	<h3>Available Users</h3>
+		<p>Filter <input data-bind="textInput: Filter" />   Limit <input data-bind="textInput: Limit" /></p>
+		
+		 <a href='#' data-bind='click: list '>Select</a> 			 
+  	</div>
+  	<div class="panel-body">
+  		<table class="table table-hover">
+      		<tr><th>Users</th><th></th><th></th></tr>
+      		<!-- ko foreach: Users -->
+				<tr data-bind='click: select '>
+					<!-- td data-bind="text: data.id"></td -->
+					<td data-bind="text: data.first_name"></td>
+					<td><img data-bind="attr: { src: data.photo_200 }" > </td>					
+					<!-- td > <a href='#' data-bind='click: select '>Select</a> </td -->	
+				</tr>
+			<!-- /ko -->
+		</table>
+  	</div>
+</div>
+       

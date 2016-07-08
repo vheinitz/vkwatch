@@ -1,0 +1,89 @@
+<style>      
+    .cellframe { 
+        
+    }
+</style>
+
+<div class="panel">
+    <div class="panel-heading">
+    	<h3 data-bind="text: name"></h3>				 
+  	</div>
+ 
+    <div class="panel-body" data-bind="visible: viewMode() == 'question' ">
+        <h4 data-bind="text:  currentQuestion"></h4>        
+        <h5 data-bind="text: 'Question '+currentCnt() + ' of '+allCnt() "></h5>        
+        <h5 data-bind="visible: remainingTime() < 5*60, text: 'Remaining Time: ' + Math.round(remainingTime() / 60) + ':' + remainingTime() % 60"></h5>
+        <div class="col-md-2">
+            <div class="list-group">
+                <!-- ko foreach: currentOptions -->
+                
+                <a href="#" class="list-group-item" data-bind="click: toggleSelection">
+                    <span data-bind="text: data.text"></span>
+                    <img  data-bind="visible: selected" src="img/checked.png" class="pull-left">
+                </a>
+                <!-- /ko -->
+            </div>
+            <a href='#' data-bind='click: nextQuestion '>Next</a>
+
+        </div>
+        <div class="col-md-10" id="imageControll">
+            <button type="button" class="btn btn-sm" data-bind="click: removeAreaSelections, visible: enableAreaSelection">Clear areas</button><br/>
+            <div id="imageContainer" border="0" margin="0" padding="0">
+                <img id='myImg' 
+                    border="0" margin="0" padding="0"
+                    data-bind="attr: { src: 'img/' + image() + '.png' }, click: imageClick" width="800", height="600" >
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-body" data-bind="visible: viewMode() == 'result' ">
+        <h2 data-bind="text:  'Right answers: ' + resultsRight() + ' of ' +  resultsQuestionsCnt() + ' ( ' +  Math.round(resultsRight() / resultsQuestionsCnt() * 100) +'% )' "></h2>                
+    </div>
+
+
+ <script type="text/javascript">
+function getCoords(target, event)
+{
+    var $target = $(target);
+    var offset = $target.offset();
+    var bordersize = $target.attr('border');
+    return {
+        x:  (event.pageX - offset.left - bordersize) | 0,
+        y:  (event.pageY - offset.top - bordersize) | 0
+    }
+}
+
+
+
+$("#myImg").on('click', function(event){
+    var coords = getCoords(this, event);
+    console.log('X: ', coords.x);
+    console.log('Y: ', coords.y);
+});
+</script>
+
+    <!-- script type="text/javascript">
+    $(document).bind('click', function () {
+        // Add a click-handler to the image.
+        $('#myImg').bind('click', function (ev) {
+            var $img = $(ev.target);
+
+            var offset = $img.offset(); // Offset from the corner of the page.
+            var xMargin = ($img.outerWidth() - $img.width()) / 2;
+            var yMargin = ($img.outerHeight() - $img.height()) / 2;
+            // Note that the above calculations assume your left margin is 
+            // equal to your right margin, top to bottom, etc. and the same 
+            // for borders.
+
+            var x = (ev.clientX + xMargin) - offset.left;
+            var y = (ev.clientY + yMargin) - offset.top;
+
+            alert('clicked at x: ' + x + ', y: ' + y);
+        });
+    });
+</script -->
+
+   
+
+ 
+</div>      
