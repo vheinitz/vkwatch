@@ -70,16 +70,25 @@ def list_topics():
     print  "CONT:", content
     filter = content['filter']
     limit = content['limit']
+    use_topics = content['use_topics']
+    use_comments = content['use_comments']
+    from_user = content['from_user']
     if not limit:
         limit=100
      #   
     #print "FILTER:" , filter
     f = u'.*%s.*' % filter
     #print u"F:" , f
-    if filter:
-        return dumps(db['group_data'].find({'text':{'$regex':f }} ).limit(limit))
+    #if filter:
+        #return dumps(db['group_data'].find({'text':{'$regex':f }} ).limit(limit)).sort({'date',pymongo.DESCENDING})
+    q = {'text':{'$regex':f }}
+    if from_user:
+        return dumps(db['group_data'].find( {"$and":[{'text':{'$regex':f }},{'from_id':int(from_user)}]} ).sort('date',pymongo.DESCENDING).limit(limit))
+    return dumps(db['group_data'].find( {"$and":[{'text':{'$regex':f }}]} ).sort('date',pymongo.DESCENDING).limit(limit))
+    #return dumps(db['group_data'].find('$regex':f ) #.sort('date',pymongo.DESCENDING).limit(limit))
     #js = json.dumps(db['group_data'].find())
-    return dumps(db['group_data'].find().limit(limit))
+    #return dumps(db['group_data'].find().limit(limit)).sort('date',pymongo.DESCENDING)
+    #return dumps(db['group_data'].find().limit(limit))
 
 @app.route('/count', methods=['GET', 'POST'])
 def count_topics():

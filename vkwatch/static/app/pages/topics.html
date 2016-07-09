@@ -2,7 +2,9 @@
     <div class="panel-heading">
     	<h3>Available Topics</h3>				 
 		<p>Filter <input data-bind="textInput: Filter" />   Limit <input data-bind="textInput: Limit" /></p>
-		<p>Topics <input type="checkbox" data-bind="checked: UseTopics" /> ; <p>Comments <input type="checkbox" data-bind="checked: UseComments" /></p>
+		<p>User <input data-bind="textInput: FromUser" /></p>
+		Topics <input type="checkbox" data-bind="checked: UseTopics" /></p>
+		<p>Comments <input type="checkbox" data-bind="checked: UseComments" /></p>
 		 <a href='#' data-bind='click: listTopics '>Select</a> 
 
   	</div>
@@ -21,7 +23,10 @@
 					</td>
 				</tr>
 				<tr data-bind='click: select '>
-					<td>						
+					<td>		
+						<a target = "_topic" data-bind="attr: { href: 'https://vk.com/wall-'+data.from_id.replace("gig_", "").replace("topic", "") }">Link</a>				
+<!--						//https://vk.com/wall-11744730_44183
+						//gid_11744730topic_43899_comment_44568 -->
 						<b><p data-bind="text: date"></p></b>
 						<b><p data-bind="text: data._id"></p></b>
 						<b><p data-bind="text: data.title"></p></b>

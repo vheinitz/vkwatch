@@ -41,7 +41,8 @@ define(["knockout", "text!./topics.html"], function(ko, template ) {
 		this.Limit = ko.observable(1000);
 		this.FilteredCount = ko.observable();
 		this.UseTopics = ko.observable(1);
-		this.UseComments = ko.observable();
+		this.FromUser = ko.observable(0);
+		this.UseComments = ko.observable(0);
 
 		
 
@@ -69,7 +70,7 @@ define(["knockout", "text!./topics.html"], function(ko, template ) {
 		
 		this.listTopics = function( )
 		{
-			filter = '{"session":"ABC", "filter":"' + self.Filter() + '", "use_topics":"' + self.UseTopics() + '", "use_comments":"' + self.UseComments() + '", "limit":' + self.Limit() +'}';
+			filter = '{"session":"ABC", "filter":"' + self.Filter() + '", "use_topics":' + self.UseTopics()+ ', "from_user":"' + self.FromUser() + '", "use_comments":"' + self.UseComments() + '", "limit":' + self.Limit() +'}';
 			console.log( "listTopics ", filter );						
 			$.ajax("/topics", {
 				data : filter,
