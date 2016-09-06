@@ -84,6 +84,7 @@ def list_topics():
     q = {'text':{'$regex':f }}
     if from_user:
         return dumps(db['group_data'].find( {"$and":[{'text':{'$regex':f }},{'from_id':int(from_user)}]} ).sort('date',pymongo.DESCENDING).limit(limit))
+        
     return dumps(db['group_data'].find( {"$and":[{'text':{'$regex':f }}]} ).sort('date',pymongo.DESCENDING).limit(limit))
     #return dumps(db['group_data'].find('$regex':f ) #.sort('date',pymongo.DESCENDING).limit(limit))
     #js = json.dumps(db['group_data'].find())

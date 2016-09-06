@@ -9,9 +9,13 @@
   		<table class="table table-hover">
       		<tr><th>Users</th><th></th><th></th></tr>
       		<!-- ko foreach: Users -->
-				<tr data-bind='click: select '>
-					<!-- td data-bind="text: data.id"></td -->
-					<td data-bind="text: data.first_name"></td>
+				<tr>
+					<td>
+						<a data-bind="attr: { href: 'https://vk.com/id'+data.id }" >
+							<i data-bind="text: data.first_name"></i>
+							<i data-bind="text: data.last_name"></i>
+						</a>
+					</td>
 					<td><img data-bind="attr: { src: data.photo_200 }" > </td>					
 					<!-- td > <a href='#' data-bind='click: select '>Select</a> </td -->	
 				</tr>
