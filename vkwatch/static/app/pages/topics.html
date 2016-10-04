@@ -22,9 +22,9 @@
 						<a target = "_user" data-bind="attr: { href: 'https://vk.com/id'+data.from_id }, text: data.from_id"></a>
 					</td>
 				</tr>
-				<tr data-bind='click: select '>
-					<td>		
-						<a target = "_topic" data-bind="attr: { href: 'https://vk.com/wall-'+data.from_id.replace("gig_", "").replace("topic", "") }">Link</a>				
+				<tr>
+					<td>
+						<a target = "_topic" data-bind="attr: { href: 'https://vk.com/wall-'+data._id }, text: data._id"></a>				
 <!--						//https://vk.com/wall-11744730_44183
 						//gid_11744730topic_43899_comment_44568 -->
 						<b><p data-bind="text: date"></p></b>

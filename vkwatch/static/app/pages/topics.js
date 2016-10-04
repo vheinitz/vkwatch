@@ -14,14 +14,18 @@ define(["knockout", "text!./topics.html"], function(ko, template ) {
 	}
 	
 	var Topic = function( model, data) {
-		//console.log( "Topic", JSON.stringify(data) );
+		console.log( "Topic", JSON.stringify(data) );
 		var self = this;	
 		this.model = model;	
 		this.data = data;
+		this.link = ko.observable();
 		this.date = timeConverter( data["date"] );
 		this.select = function() {
-			console.log("select:" + self.data.id);
-			self.model.selectTopic( self )	
+			//console.log("select:" + self.data.id);
+			self.model.selectTopic( self )
+			console.log( "TopicLink", data._id );
+			//self.link( self.data._id.replace('gid_','') );
+			
 		}.bind(this);
         
 	}	
@@ -41,8 +45,8 @@ define(["knockout", "text!./topics.html"], function(ko, template ) {
 		this.Limit = ko.observable(1000);
 		this.FilteredCount = ko.observable();
 		this.UseTopics = ko.observable(1);
-		this.FromUser = ko.observable(0);
-		this.UseComments = ko.observable(0);
+		this.FromUser = ko.observable('');
+		this.UseComments = ko.observable(1);
 
 		
 
