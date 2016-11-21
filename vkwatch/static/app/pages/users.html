@@ -2,7 +2,8 @@
     <div class="panel-heading">
     	<h3>Available Users</h3>
 		<p>Filter <input data-bind="textInput: Filter" />   Limit <input data-bind="textInput: Limit" /></p>
-		
+		Offset <input data-bind="textInput: Offset" /></p>
+		<p data-bind="text: 'Count:' + Count()"></p>
 		 <a href='#' data-bind='click: list '>Select</a> 			 
   	</div>
   	<div class="panel-body">

@@ -19,7 +19,10 @@ define(["knockout", "text!./users.html"], function(ko, template ) {
 		this.Users = ko.observableArray();
 		this.Filter = ko.observable('');
 		this.Limit = ko.observable(100);
+		this.Offset = ko.observable(0);
 		this.FilteredCount = ko.observable();
+		this.Count = ko.observable();
+		
 
 		
 
@@ -28,11 +31,12 @@ define(["knockout", "text!./users.html"], function(ko, template ) {
 		this.init = function() {	   
 			//self.list();
 			console.log( "init" );
+			self.countUsers();
 		};
 
 		this.list = function( )
 		{
-			filter = '{"session":"ABC", "filter":"' + self.Filter() + '",  "limit":' + self.Limit() +'}';
+			filter = '{"session":"ABC", "filter":"' + self.Filter() + '",  "limit":' + self.Limit() + ',  "offset":' + self.Offset() +'}';
 			console.log( "list ", filter );						
 			$.ajax("/users", {
 				data : filter,
@@ -52,6 +56,20 @@ define(["knockout", "text!./users.html"], function(ko, template ) {
 				}
 			});
 		};
+		
+		this.countUsers = function( )
+		{
+			console.log("countTopics");
+			$.ajax("/count_users", {
+				data : '{"session":"ABCDEFG"}',
+				contentType : 'application/json;charset=utf-8',
+				type : 'POST',
+				success:  function(data) {
+					js =  JSON.parse(data);
+					self.Count(js["count"]);
+				}
+			});
+		}
 
 		this.selectUser = function ( user) {
 		    console.log("selectUser ", user.data.id);

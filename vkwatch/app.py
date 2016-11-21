@@ -52,17 +52,20 @@ def list_users():
     print  "CONT:", content
     filter = content['filter']
     limit = content['limit']
+    offset = content['offset']
     if not limit:
         limit=100
+    if not offset:
+        offset=0
      #  
     #print "FILTER:" , filter
     f = u'.*%s.*' % filter
     #print "F:" , f.encod
     if filter:
-        return dumps(db['users'].find({'$or':[{'first_name':{'$regex':f }},{'last_name':{'$regex':f }}]} ).limit(limit))
+        return dumps(db['users'].find({'$or':[{'first_name':{'$regex':f }},{'last_name':{'$regex':f }}]} ).skip(offset).limit(limit))
         #return dumps(db['users'].find({'first_name':{'$regex':f }} ).limit(limit))
     #js = json.dumps(db['users'].find())
-    return dumps(db['users'].find().limit(limit))
+    return dumps(db['users'].find().skip(offset).limit(limit))
     
 @app.route('/topics', methods=['GET', 'POST'])
 def list_topics():
@@ -99,6 +102,15 @@ def count_topics():
     data = '{"result":"ok","count":%d}'%(cnt)
     print data
     return data
-    
+
+@app.route('/count_users', methods=['GET', 'POST'])
+def count_users():
+    content = request.get_json()
+    print  "CONT:", content
+    cnt = db['users'].find().count()
+    data = '{"result":"ok","count":%d}'%(cnt)
+    print data
+    return data
+	
 if __name__ == '__main__':
     app.run(debug=True);   
